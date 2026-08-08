@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>فما عشا ؟ - Batchcooking App</title>
+    <title>فمّا عشاء ؟ - Batchcooking App</title>
     <!-- Police moderne Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -114,53 +114,50 @@
         
         .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(230, 81, 0, 0.25); }
         .btn-primary:hover { background: var(--primary-dark); }
-        
-        /* Style désactivé pour le bouton de la page 1 tant qu'aucun genre n'est choisi */
-        .btn-primary:disabled {
-            background: #cbd5e1;
-            color: #94a3b8;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
 
         .btn-secondary { background: #e2e8f0; color: #475569; }
 
-        .gender-container {
-            display: flex;
-            gap: 12px;
-            margin: 1.5rem 0;
-        }
-        .gender-card {
-            flex: 1;
+        .info-card {
             background: var(--card-bg);
-            border: 2px solid var(--border);
-            padding: 1.25rem 1rem;
+            border: 1px solid var(--border);
+            padding: 1.25rem;
             border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .gender-card.selected {
-            border-color: var(--primary);
-            background: #FFF4E6;
-            color: var(--primary);
-        }
-        .gender-message {
-            background: #ffffff;
-            border-left: 4px solid var(--primary);
-            padding: 14px;
-            border-radius: 0 10px 10px 0;
-            font-size: 0.92rem;
-            color: #475569;
-            line-height: 1.5;
             margin-bottom: 1.5rem;
             box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-            display: none;
         }
-        .gender-message.active { display: block; }
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+        .info-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+        .info-list li.spacer {
+            margin-top: 8px;
+        }
+        .info-icon {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .nota-bene {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 1rem;
+            text-align: center;
+            line-height: 1.4;
+        }
 
         .offer-card {
             background: var(--card-bg);
@@ -174,8 +171,18 @@
             transition: all 0.2s;
         }
         .offer-card:hover { border-color: var(--primary); }
-        .offer-card h3 { margin: 0 0 5px 0; font-size: 1.15rem; color: var(--text); }
-        .offer-price { font-size: 1.35rem; font-weight: 700; color: var(--primary); margin-top: 8px; }
+        .offer-card h3 { 
+            margin: 0 0 4px 0; 
+            font-size: 1.45rem; 
+            color: var(--primary); 
+            font-weight: 700;
+        }
+        .offer-desc {
+            margin: 0; 
+            font-size: 0.78rem; 
+            color: #94a3b8; 
+            font-weight: 500;
+        }
 
         .grid-plats {
             display: grid;
@@ -192,13 +199,14 @@
         }
         .plat-img {
             width: 100%;
-            height: 105px;
+            height: 95px;
             background-color: #e2e8f0;
             background-size: cover;
             background-position: center;
         }
-        .plat-info { padding: 10px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .plat-title { font-size: 0.82rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+        .plat-info { padding: 8px 10px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .plat-title { font-size: 0.82rem; font-weight: 600; margin-bottom: 2px; color: var(--text); }
+        .plat-price-tag { font-size: 0.78rem; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
         
         .counter {
             display: flex;
@@ -210,16 +218,16 @@
             border: 1px solid var(--border);
         }
         .counter button {
-            padding: 6px 12px;
+            padding: 4px 10px;
             background: transparent;
             color: var(--primary);
             font-size: 1.1rem;
             flex: none;
-            min-height: 36px;
-            min-width: 36px;
+            min-height: 32px;
+            min-width: 32px;
         }
         .counter button:active { background: #e2e8f0; }
-        .counter span { font-weight: 700; font-size: 0.95rem; }
+        .counter span { font-weight: 700; font-size: 0.9rem; }
 
         /* Barre du nombre de produits fixée en BAS de l'écran lors du défilement */
         .sticky-cart-status {
@@ -276,18 +284,18 @@
         
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; margin-bottom: 5px; font-size: 0.85rem; font-weight: 600; color: #475569; }
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%; padding: 12px; border: 1px solid var(--border);
             border-radius: 10px; box-sizing: border-box; font-size: 0.95rem; font-family: 'Inter', sans-serif;
             background: #fff;
             transition: border-color 0.2s;
         }
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none;
             border-color: var(--primary);
         }
         .error-msg { color: #dc2626; font-size: 0.78rem; margin-top: 4px; display: none; }
-        .form-group.error input { border-color: #dc2626; }
+        .form-group.error input, .form-group.error textarea, .form-group.error select { border-color: #dc2626; }
         .form-group.error .error-msg { display: block; }
     </style>
 </head>
@@ -298,55 +306,45 @@
     <!-- BANDEAU PRIX FIXÉ EN HAUT -->
     <div id="sticky-total" class="sticky-total">
         <div class="total-label">Total Commande</div>
-        <div class="total-amount" id="total-price-display">0.000 TND</div>
+        <div class="total-amount" id="total-price-display">0.000 / 79.000 TND</div>
     </div>
 
     <div class="page-content">
         <!-- PAGE 1 -->
         <div id="page-1" class="page active">
-            <h2 style="font-size: 2rem; margin-top: 1rem; direction: rtl; text-align: right;">فما عشا ؟</h2>
-            <p class="subtitle" style="font-size: 1rem; font-weight: 600; color: var(--primary);">Batchcooking experts</p>
+            <h2 style="font-size: 2rem; margin-top: 1rem; direction: rtl; text-align: right;">فمّا عشاء ؟</h2>
+            <p class="subtitle" style="font-size: 1rem; font-weight: 600; color: var(--primary);">Votre menu de la semaine en un click</p>
             
-            <p style="font-size: 0.92rem; color: #475569; margin-bottom: 8px;">Qui commande aujourd'hui ?</p>
-            <div class="gender-container">
-                <div class="gender-card" id="btn-homme" onclick="selectGender('homme')">Un Homme</div>
-                <div class="gender-card" id="btn-femme" onclick="selectGender('femme')">Une Femme</div>
+            <div class="info-card">
+                <ul class="info-list">
+                    <li><span class="info-icon">🍲</span> Fait maison &bull; <span class="info-icon">🌿</span> Produit frais</li>
+                    <li class="spacer"><span class="info-icon">📅</span> Lundi -> Jeudi : Commande</li>
+                    <li><span class="info-icon">🚚</span> Dimanche : Livraison (gratuite)</li>
+                </ul>
             </div>
 
-            <div id="msg-homme" class="gender-message">
-                Elle n'a pas envie de cuisiner, elle n'est pas ta mère, passe une commande et laisse la tranquille !
-            </div>
-
-            <div id="msg-femme" class="gender-message">
-                Il croit que tu es cheffe ou quoi ? passe une commande et fais la payer par lui. You should be his princess! 👑
-            </div>
+            <p class="nota-bene">Nota : Nous livrons que le Grand Tunis[cite: 1]</p>
 
             <div style="margin-top: 2rem;">
-                <button id="btn-next-page1" class="btn-primary" onclick="goToPage(2)" disabled>Passer à la commande</button>
+                <button class="btn-primary" onclick="goToPage(2)">Passer à la commande</button>
             </div>
         </div>
 
         <!-- PAGE 2 -->
         <div id="page-2" class="page">
-            <h2>Choisissez votre formule</h2>
-            <p class="subtitle">Sélectionnez l'offre de plats maison qui vous correspond.</p>
-            
-            <div class="offer-card" onclick="selectOffer('enjareb')">
-                <h3>Offre "Enjareb"</h3>
-                <p style="margin:0; font-size: 0.88rem; color:#64748b;">2 plats au choix (soit 24.500 TND / plat)</p>
-                <div class="offer-price">49 TND</div>
+            <div class="offer-card" onclick="selectOffer('tunis')">
+                <h3>تونس الكبرى</h3>
+                <p class="offer-desc">Minimum order 79 TND</p>
             </div>
             
-            <div class="offer-card" onclick="selectOffer('commande')">
-                <h3>Offre "Je passe ma commande"</h3>
-                <p style="margin:0; font-size: 0.88rem; color:#64748b;">5 plats au choix (soit 17.800 TND / plat)</p>
-                <div class="offer-price">89 TND</div>
+            <div class="offer-card" onclick="selectOffer('ghorba')">
+                <h3>فِلغُربة</h3>
+                <p class="offer-desc">Minimum order 169 TND</p>
             </div>
 
-            <div class="offer-card" onclick="selectOffer('ghorba')">
-                <h3>Offre Ghorba</h3>
-                <p style="margin:0; font-size: 0.88rem; color:#64748b;">10 plats en conserve (soit 16.900 TND / plat)</p>
-                <div class="offer-price">169 TND</div>
+            <div class="offer-card" onclick="selectOffer('rabii')">
+                <h3>ربّي إخلّص وحلو</h3>
+                <p class="offer-desc">Minimum order 129 TND</p>
             </div>
             
             <div class="nav-buttons">
@@ -363,7 +361,7 @@
             
             <div class="nav-buttons">
                 <button class="btn-back-icon" onclick="goToPage(2)" title="Retour">←</button>
-                <button class="btn-primary" onclick="goToPage(4)">Suivant</button>
+                <button id="btn-next-page3" class="btn-primary" onclick="goToPage(4)">Suivant</button>
             </div>
         </div>
 
@@ -480,17 +478,31 @@
 
             <div class="form-group" id="group-name">
                 <label>Nom complet</label>
-                <input type="text" id="input-name" placeholder="Foulen Ben Foulen">
+                <input type="text" id="input-name" autocomplete="name" placeholder="Foulen Ben Foulen">
                 <div class="error-msg">Veuillez entrer votre nom.</div>
             </div>
             <div class="form-group" id="group-phone">
                 <label>Numéro de téléphone</label>
-                <input type="tel" id="input-phone" placeholder="20 000 000">
+                <input type="tel" id="input-phone" autocomplete="tel" placeholder="20 000 000">
                 <div class="error-msg">Numéro tunisien invalide (8 chiffres requis).</div>
             </div>
+            <div class="form-group" id="group-quartier">
+                <label>Quartier / Délégation (Grand Tunis)</label>
+                <select id="input-quartier">
+                    <option value="">-- Sélectionnez votre zone --</option>
+                    <option value="Tunis">Tunis (Centre-ville, El Manar, Mutuelleville...)</option>
+                    <option value="Ariana">Ariana (Ennasr, Ariana Ville, Borj Louzir...)</option>
+                    <option value="Marsa_Carthage">La Marsa / Carthage / Sidi Bou Saïd</option>
+                    <option value="Carthage_Kram">Le Kram / Goulette</option>
+                    <option value="BenArous">Ben Arous (Mgrine, Ezzahra, Rades...)</option>
+                    <option value="Manouba">Manouba / Oued Ellil</option>
+                    <option value="Autre">Autre zone du Grand Tunis</option>
+                </select>
+                <div class="error-msg">Veuillez sélectionner votre quartier.</div>
+            </div>
             <div class="form-group" id="group-address">
-                <label>Adresse exacte</label>
-                <textarea id="input-address" rows="3" placeholder="Quartier, rue, immeuble..."></textarea>
+                <label>Adresse exacte (Rue, Immeuble...)</label>
+                <textarea id="input-address" autocomplete="street-address" rows="3" placeholder="Quartier, rue, immeuble..."></textarea>
                 <div class="error-msg">Veuillez indiquer l'adresse de livraison.</div>
             </div>
 
@@ -501,7 +513,7 @@
 
             <div class="nav-buttons">
                 <button class="btn-back-icon" onclick="goToPage(5)" title="Retour">←</button>
-                <!-- Bouton "Envoyer ma commande" avec exécution immédiate -->
+                <!-- Bouton "Envoyer ma commande" cliquable sans blocage de style, vérification dynamique -->
                 <button class="btn-primary" style="background: #25D366; display: flex; justify-content: center; align-items: center; gap: 8px;" onclick="validateAndSubmitOrder()">
                     <svg style="width:22px;height:22px" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.59 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.57L5.06 16.24C4.24 14.9 3.81 13.43 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.11 8.02 12.28C8.15 12.45 9.75 14.93 12.21 15.99C14.26 16.87 14.68 16.7 15.12 16.66C15.56 16.62 16.5 16.1 16.7 15.55C16.9 15 16.9 14.53 16.84 14.44C16.78 14.36 16.65 14.3 16.45 14.2C16.25 14.1 15.25 13.61 15.07 13.55C14.89 13.49 14.76 13.46 14.63 13.66C14.5 13.85 14.14 14.28 14.03 14.41C13.92 14.54 13.81 14.56 13.61 14.46C13.41 14.36 12.76 14.15 11.99 13.47C11.39 12.94 10.98 12.28 10.86 12.08C10.74 11.88 10.85 11.77 10.95 11.67C11.05 11.57 11.17 11.41 11.3 11.25C11.43 11.09 11.48 10.97 11.56 10.84C11.64 10.71 11.6 10.6 11.55 10.5C11.5 10.4 11.04 9.27 10.85 8.81C10.66 8.36 10.47 8.43 10.33 8.42C10.2 8.41 10.05 8.41 9.9 8.41C9.75 8.41 9.51 8.47 9.31 8.69C9.11 8.91 8.55 9.43 8.55 10.51C8.55 11.59 9.34 12.64 9.45 12.78C9.56 12.92 11 15.14 13.23 16.12C13.76 16.35 14.17 16.49 14.49 16.59C15.02 16.76 15.5 16.73 15.87 16.68C16.28 16.62 17.15 16.15 17.33 15.63C17.51 15.11 17.51 14.66 17.45 14.56C17.39 14.46 17.26 14.41 17.06 14.31Z"/></svg>
                     Envoyer ma commande
@@ -531,17 +543,16 @@
     let currentOffer = '';
     let selectedMeals = 0;
     let basePrice = 0;
-    let selectedGender = '';
     
     const platsTunisiens = [
-        { nom: "Couscous à l'agneau", img: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=300&q=80" },
-        { nom: "Ojja Merguez", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=300&q=80" },
-        { nom: "Kafteji Tunisien", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=300&q=80" },
-        { nom: "Mloukhiya à la viande", img: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=300&q=80" },
-        { nom: "Kamounia", img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=300&q=80" },
-        { nom: "Macaroni Salsa", img: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=300&q=80" },
-        { nom: "Tastira & Escalope", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80" },
-        { nom: "Riz Djerbien", img: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=300&q=80" }
+        { nom: "Couscous à l'agneau", img: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=300&q=80", prix: (Math.random() * (24 - 14) + 14).toFixed(3) },
+        { nom: "Ojja Merguez", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=300&q=80", prix: (Math.random() * (24 - 14) + 14).toFixed(3) },
+        { nom: "Kafteji Tunisien", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=300&q=80", prix: (Math.random() * (24 - 14) + 14).toFixed(3) },
+        { nom: "Mloukhiya à la viande", img: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=300&q=80", prix: (Math.random() * (24 - 14) + 14).toFixed(3) },
+        { nom: "Kamounia", img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=300&q=80", prix: (Math.random() * (24 - 14) + 14).toFixed(3) },
+        { nom: "Macaroni Salsa", img: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=300&q=80", prix: (Math.random() * (24 - 14) + 14).toFixed(3) },
+        { nom: "Tastira & Escalope", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80", prix: (Math.random() * (24 - 14) + 14).toFixed(3) },
+        { nom: "Riz Djerbien", img: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=300&q=80", prix: (Math.random() * (24 - 14) + 14).toFixed(3) }
     ];
 
     let platsQty = new Array(platsTunisiens.length).fill(0);
@@ -567,6 +578,7 @@
                 <div class="plat-img" style="background-image: url('${plat.img}');"></div>
                 <div class="plat-info">
                     <div class="plat-title">${plat.nom}</div>
+                    <div class="plat-price-tag">${plat.prix} TND</div>
                     <div class="counter">
                         <button onclick="updatePlat(-1, ${index})">-</button>
                         <span id="qty-${index}">0</span>
@@ -576,24 +588,6 @@
             </div>
         `;
     });
-
-    function selectGender(gender) {
-        selectedGender = gender;
-        document.getElementById('btn-homme').classList.remove('selected');
-        document.getElementById('btn-femme').classList.remove('selected');
-        document.getElementById('msg-homme').classList.remove('active');
-        document.getElementById('msg-femme').classList.remove('active');
-
-        if(gender === 'homme') {
-            document.getElementById('btn-homme').classList.add('selected');
-            document.getElementById('msg-homme').classList.add('active');
-        } else {
-            document.getElementById('btn-femme').classList.add('selected');
-            document.getElementById('msg-femme').classList.add('active');
-        }
-
-        document.getElementById('btn-next-page1').removeAttribute('disabled');
-    }
 
     function goToPage(pageNumber) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -616,24 +610,24 @@
         }
 
         if(pageNumber === 7) {
-            document.getElementById('final-recap').innerText = "Montant total : " + document.getElementById('total-price-display').innerText;
+            document.getElementById('final-recap').innerText = "Montant total : " + document.getElementById('total-price-display').innerText.split(' / ')[0];
         }
     }
 
     function selectOffer(offerName) {
         currentOffer = offerName;
-        if (offerName === 'enjareb') {
-            basePrice = 49;
-        } else if (offerName === 'commande') {
-            basePrice = 89;
+        if (offerName === 'tunis') {
+            basePrice = 79;
+        } else if (offerName === 'rabii') {
+            basePrice = 129;
         } else if (offerName === 'ghorba') {
             basePrice = 169;
         }
 
         let offerText = '';
-        if(offerName === 'enjareb') offerText = 'Enjareb (2 plats)';
-        else if(offerName === 'commande') offerText = 'Commande (5 plats)';
-        else if(offerName === 'ghorba') offerText = 'Offre Ghorba (10 plats en conserve)';
+        if(offerName === 'tunis') offerText = 'تونس الكبرى (' + basePrice + ' TND)';
+        else if(offerName === 'rabii') offerText = 'ربّي إخلّص وحلو (' + basePrice + ' TND)';
+        else if(offerName === 'ghorba') offerText = 'فِلغُربة (' + basePrice + ' TND)';
 
         document.getElementById('offer-instruction').innerHTML = `Formule active : <strong>${offerText}</strong>.`;
         calculateTotal();
@@ -643,19 +637,6 @@
     
     function updatePlat(change, index) {
         let newQty = platsQty[index] + change;
-        
-        if (currentOffer === 'enjareb' && change > 0 && selectedMeals >= 2) {
-            triggerUpsell('enjareb', 2);
-            return; 
-        }
-        if (currentOffer === 'commande' && change > 0 && selectedMeals >= 5) {
-            triggerUpsell('commande', 5);
-            return;
-        }
-        if (currentOffer === 'ghorba' && change > 0 && selectedMeals >= 10) {
-            triggerUpsell('ghorba', 10);
-            return;
-        }
         
         if(newQty >= 0) {
             platsQty[index] = newQty;
@@ -685,11 +666,13 @@
     }
 
     function calculateTotal() {
-        let total = basePrice;
-        if (currentOffer === 'commande' && selectedMeals > 5) {
-            total += (selectedMeals - 5) * 15;
-        } else if (currentOffer === 'ghorba' && selectedMeals > 10) {
-            total += (selectedMeals - 10) * 15;
+        let total = 0;
+        let platsTotal = 0;
+
+        for(let i=0; i<platsQty.length; i++) {
+            let pVal = platsQty[i] * parseFloat(platsTunisiens[i].prix);
+            platsTotal += pVal;
+            total += pVal;
         }
 
         for(let i=0; i<entreesQty.length; i++) {
@@ -700,28 +683,19 @@
             total += dessertsQty[i] * dessertsList[i].prix;
         }
 
-        document.getElementById('total-price-display').innerText = total.toFixed(3) + " TND";
+        document.getElementById('total-price-display').innerText = total.toFixed(3) + " / " + basePrice.toFixed(3) + " TND";
+
+        const nextBtn = document.getElementById('btn-next-page3');
+        if (platsTotal >= basePrice) {
+            nextBtn.removeAttribute('disabled');
+        } else {
+            nextBtn.setAttribute('disabled', 'true');
+        }
     }
 
     function updateCartStatus() {
         let statusEl = document.getElementById('sticky-cart-status');
-        let text = `<strong>Plats sélectionnés : ${selectedMeals}</strong>`;
-        
-        let limit = 2;
-        if (currentOffer === 'commande') limit = 5;
-        if (currentOffer === 'ghorba') limit = 10;
-
-        if (selectedMeals < limit) {
-            text += ` <span style="color: #94a3b8;">(Il manque ${limit - selectedMeals} plat(s))</span>`;
-        } else {
-            let extra = selectedMeals - limit;
-            text += ` <span style="color: #4ade80;">(Offre validée !${extra > 0 ? ' + ' + extra + ' supp.' : ''})</span>`;
-        }
-        statusEl.innerHTML = text;
-    }
-
-    function triggerUpsell(offer, limit) {
-        alert(`Limite de ${limit} plats atteinte pour cette formule.`);
+        statusEl.innerHTML = `<strong>Plats sélectionnés : ${selectedMeals}</strong>`;
     }
 
     function renderOrderSummary() {
@@ -737,7 +711,7 @@
                 hasPlats = true;
                 platsDiv.innerHTML += `
                     <div class="summary-row">
-                        <span class="summary-name">${plat.nom}</span>
+                        <span class="summary-name">${plat.nom} (${plat.prix} TND)</span>
                         <div class="counter" style="background:#f1f5f9;">
                             <button onclick="updatePlatFromSummary(-1, ${index})" style="padding: 2px 8px; min-height: 28px; min-width: 28px;">-</button>
                             <span style="padding: 0 6px;">${qty}</span>
@@ -779,23 +753,26 @@
     }
 
     function updatePlatFromSummary(change, index) {
-        let limit = 2;
-        if (currentOffer === 'commande') limit = 5;
-        if (currentOffer === 'ghorba') limit = 10;
-
-        if (change > 0 && selectedMeals >= limit) {
-            goToPage(3);
-            return;
-        }
         updatePlat(change, index);
         renderOrderSummary();
     }
 
     function validateAndSubmitOrder() {
+        let platsTotal = 0;
+        for(let i=0; i<platsQty.length; i++) {
+            platsTotal += platsQty[i] * parseFloat(platsTunisiens[i].prix);
+        }
+
+        if (platsTotal < basePrice) {
+            alert(`Merci de respecter le minimum order des plats pour valider votre commande. Solde actuel des plats : ${platsTotal.toFixed(3)} TND / Minimum requis : ${basePrice.toFixed(3)} TND`);
+            return;
+        }
+
         let valid = true;
         
         const nameInput = document.getElementById('input-name');
         const phoneInput = document.getElementById('input-phone');
+        const quartierSelect = document.getElementById('input-quartier');
         const addressInput = document.getElementById('input-address');
 
         document.querySelectorAll('.form-group').forEach(el => el.classList.remove('error'));
@@ -812,13 +789,17 @@
             valid = false;
         }
 
+        if(quartierSelect.value === '') {
+            document.getElementById('group-quartier').classList.add('error');
+            valid = false;
+        }
+
         if(addressInput.value.trim() === '') {
             document.getElementById('group-address').classList.add('error');
             valid = false;
         }
 
         if(valid) {
-            // Lancement immédiat de WhatsApp au clic sans délai (évite le blocage des navigateurs)
             sendToWhatsApp();
             goToPage(7);
         }
@@ -827,18 +808,20 @@
     function sendToWhatsApp() {
         const name = document.getElementById('input-name').value;
         const phone = document.getElementById('input-phone').value;
+        const quartier = document.getElementById('input-quartier').value;
         const address = document.getElementById('input-address').value;
         const notes = document.getElementById('input-notes').value.trim();
-        const total = document.getElementById('total-price-display').innerText;
+        const total = document.getElementById('total-price-display').innerText.split(' / ')[0];
 
-        let offerTitle = 'Offre Enjareb (2 plats)';
-        if(currentOffer === 'commande') offerTitle = 'Offre 5 plats';
-        else if(currentOffer === 'ghorba') offerTitle = 'Offre Ghorba (10 plats en conserve)';
+        let offerTitle = 'تونس الكبرى';
+        if(currentOffer === 'rabii') offerTitle = 'ربّي إخلّص وحلو';
+        else if(currentOffer === 'ghorba') offerTitle = 'فِلغُربة';
 
-        let message = `*Nouvelle Commande - فما عشا ؟* 🥘\n\n`;
+        let message = `*Nouvelle Commande - فمّا عشاء ؟* 🥘\n\n`;
         message += `👤 *Client :* ${name}\n`;
         message += `📞 *Téléphone :* ${phone}\n`;
-        message += `📍 *Adresse :* ${address}\n`;
+        message += `📍 *Quartier :* ${quartier}\n`;
+        message += `🏠 *Adresse :* ${address}\n`;
         if(notes !== "") {
             message += `📝 *Remarques :* ${notes}\n`;
         }
@@ -847,7 +830,7 @@
 
         platsTunisiens.forEach((plat, i) => {
             if(platsQty[i] > 0) {
-                message += `- ${plat.nom} : x${platsQty[i]}\n`;
+                message += `- ${plat.nom} (${plat.prix} TND) : x${platsQty[i]}\n`;
             }
         });
 
